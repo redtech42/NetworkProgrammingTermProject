@@ -6,7 +6,7 @@ This will be the source code for our project, which will be used in a separate G
 
 How?
 
-The user will be able to read the active devices on the network to determine who to send a certain file to.
+The user will be able to read the active devices on the network to determine who to send a certain file to. After entering a filepath, the file will be transfered to a receiving end program.
 
 # Deliverables
 
