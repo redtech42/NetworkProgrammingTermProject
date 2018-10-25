@@ -16,11 +16,11 @@ The user will be able to read the active devices on the network to determine who
 
 # Plan
 
-* Week 1:
+### Week 1:
 - Investigate whether Server/Client or Peer to Peer is more reliable
 - Create text based backend
 - Design UI
-* Week 2:
+### Week 2:
 - 
 
 # Team Members
