@@ -60,4 +60,4 @@ File tranfer is very imprtant in this day and age. Gaining the knowleadge nesses
 1. Revise the description. Make sure that you answer the 3 questions What? Why? How? clearly. From reading your description, it is hard to understand the scenario that you are trying to accomplish (Resolved)
 2. Be more specific about the deliverables. What will be in GUI frontend (features?)? What does the backend do (features)? (Resolved)
 3. At this point you should have a rough idea about the plan of implementation. Make sure to add all 5 weeks in your plan. (Resolved)
-4. ProgressUpdates.md is missing!
+4. ProgressUpdates.md is missing! (Resolved)
