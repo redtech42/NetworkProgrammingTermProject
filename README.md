@@ -26,16 +26,16 @@ The user will be able to read the active devices on the network to determine who
 - Investigate whether Server/Client or Peer to Peer is more reliable
 - Create text based backend
 - Design UI
-### week 2:
+### Week 2:
 - study up on how file transfer works
 -	using sudo code - create server/client connections
-### week 3:
+### Week 3:
 - Work on creating the server
 -	Basic work on the client
-### week 4:
+### Week 4:
 - Work on creating the client 
 -	Connect the clients to the server	
-### week5:
+### Week 5:
 - Flesh out the UI 
 -	Fix any problems and/or outlier bugs
 
