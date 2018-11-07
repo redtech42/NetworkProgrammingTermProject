@@ -26,8 +26,19 @@ The user will be able to read the active devices on the network to determine who
 - Investigate whether Server/Client or Peer to Peer is more reliable
 - Create text based backend
 - Design UI
-### Week 2:
-- 
+### week 2:
+- study up on how file transfer works
+-	using sudo code - create server/client connections
+### week 3:
+- Work on creating the server
+-	Basic work on the client
+### week 4:
+- Work on creating the client 
+-	Connect the clients to the server	
+### week5:
+- Flesh out the UI 
+-	Fix any problems and/or outlier bugs
+
 
 # Team Members
 * Dylan Knepper, developer
