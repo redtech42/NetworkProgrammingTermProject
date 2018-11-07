@@ -10,9 +10,15 @@ The user will be able to read the active devices on the network to determine who
 
 # Deliverables
 
-1. GUI frontend
-2. Program Backend
-3. Documentation
+### GUI frontend:
+- Select user on the network to send to
+- Receiving user will see received files
+- filepath line for file selection, ideally with browse button
+### Program Backend:
+- open port to receive or send files
+- schedule to handle receiving and sending files, with send priority
+### Documentation:
+- Notes or a help file with more detailed information on what every feature does
 
 # Plan
 
