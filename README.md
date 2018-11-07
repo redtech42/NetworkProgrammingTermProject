@@ -9,11 +9,11 @@ This will be the source code for our project, which will be used in a separate G
 
 How?
 
-The user will connect to a server and be able to read the active devices on the network to determine who to send a certain file to. After entering a filepath, the recipient will have to accept the file. Once accepted, the file will be transfered to a receiving end user running the same program.
+The user will run the program and detect the active devices on the network to determine who to send a certain file to. After entering a filepath, the recipient will have to accept the file. Once accepted, the file will be transfered to a receiving end user running the same program.
 
 Why?
 
-File tranfer is very imprtant in this day and age. Gaining the knowleadge nessesary to be able to do this on our own will be benifitial in our careers as computer scientists. Since we did not learn about file transfer in class, this will be the perfect oppertunity to do so.
+File tranfer is very imprtant in this day and age. Gaining the knowleadge nessesary to be able to do this on our own will be benificial in our careers as computer scientists. Since we did not learn about file transfer in class, this will be the perfect opportunity to do so.
 
 # Deliverables
 
@@ -26,8 +26,7 @@ File tranfer is very imprtant in this day and age. Gaining the knowleadge nesses
 - schedule to handle receiving and sending files, with send priority
 ### Documentation:
 - Notes or a help file with more detailed information on what every feature does
-  - How to connect to server
-  - How to display others on the network
+  - How to display divices on the network
   - How to select/send a file
   - How to accept a file
 
