@@ -38,13 +38,14 @@ File tranfer is very imprtant in this day and age. Gaining the knowleadge nesses
 - Design UI
 ### Week 2:
 - study up on how file transfer works
--	using sudo code - create server/client connections
+-	using pseudo code - create P2P connections
 ### Week 3:
-- Work on creating the server
--	Basic work on the client
+- Work on establishing links between peer devices
+- Work on selection of device to send files to
+- Conceptualize file scheduling, so no simultaneous send/receive
 ### Week 4:
-- Work on creating the client 
--	Connect the clients to the server	
+- Work on file transfer
+- Work on scheduling to prevent errors in communication
 ### Week 5:
 - Flesh out the UI 
 -	Fix any problems and/or outlier bugs
