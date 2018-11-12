@@ -11,4 +11,5 @@ ProgressUpdates.md
 	- Module manages the overall operations of a single node in the P2P network
 	- List of known peers implements by the programmer (Not seamless connection)
 - tkinter
-	-
+	- got tkinter to work
+	- looked at basic framework for making an interactive window
