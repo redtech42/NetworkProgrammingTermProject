@@ -8,17 +8,21 @@ class Application(tk.Frame):
         self.create_widgets()
 
     def create_widgets(self):
-        self.hi_there = tk.Button(self)
-        self.hi_there["text"] = "Hello World\n(click me)"
-        self.hi_there["command"] = self.say_hi
-        self.hi_there.pack(side="top")
+        self.availableIP = tk.textbox(self)
+        self.availableIP["text"] = "Click 'Check network' to populate the list"
+        
+        self.checkNetwork = tk.button(self)
+        self.checkNetwork["command"] = self.check_network
+        self.availableIP.pack(side="top")
+        self.checkNetwork.pack(side="middle")
 
         self.quit = tk.Button(self, text="QUIT", fg="red",
                               command=self.master.destroy)
         self.quit.pack(side="bottom")
 
-    def say_hi(self):
-        print("hi there, everyone!")
+    def check_network(self):
+        self.availableIP["text"] = "You have checked the IP addresses"
+        
 
 root = tk.Tk()
 app = Application(master=root)
