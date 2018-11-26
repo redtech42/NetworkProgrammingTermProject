@@ -8,13 +8,13 @@ class Application(tk.Frame):
         self.create_widgets()
 
     def create_widgets(self):
-        self.availableIP = tk.textbox(self)
-        self.availableIP["text"] = "Click 'Check network' to populate the list"
+        self.availableIP = tk.Label(self, text='Click Check network to populate the list')
         
-        self.checkNetwork = tk.button(self)
+        self.checkNetwork = tk.Button(self)
         self.checkNetwork["command"] = self.check_network
+        self.checkNetwork["text"] = "Check network"
         self.availableIP.pack(side="top")
-        self.checkNetwork.pack(side="middle")
+        self.checkNetwork.pack(side="left")
 
         self.quit = tk.Button(self, text="QUIT", fg="red",
                               command=self.master.destroy)
