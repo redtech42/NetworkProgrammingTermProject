@@ -24,11 +24,10 @@ def sListen():
             with open('received_file', 'wb') as f:
                 print('file opened')
                 while True:
-                    print('receiving data...')
                     data = conn.recv(1024)
-                    print(data)
                     if not data:
                         break
+                    print('receiving data...')
                     # write data to a file
                     f.write(data)
             f.close()
