@@ -1,5 +1,6 @@
 import socket
-import os 
+import os
+import sys
 
 myIP = socket.gethostbyname(socket.gethostname())
 print(myIP)
@@ -7,35 +8,43 @@ serverPort = 12000
 
 def sListen():
     serverName = myIP
-    serverSocket = socket(AF_INET,SOCK_STREAM)
+    serverSocket = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
     serverSocket.bind((serverName,serverPort))
-    serverSocket.listen(1)
-    sData = "temp"
+    serverSocket.listen(5)
+    print("serve is listening...")
+    
     print ('The server is ready to receive')
-    connectionSocket, addr = serverSocket.accept()
+    conn, addr = serverSocket.accept()
     print ('connected ' + serverName + ":" + str(serverPort))
     while True:
-        client = connectionSocket.recv(1024).decode()
+        client = conn.recv(1024).decode()
         if client == "end":
             exit()
         if client == "sendFile":
-            sFileName = connectionSocket.recv(1024)
-            fDownloadFile = open(sFileName, "wb")
-            while sData:
-               fDownloadFile.write(sData)
-               sData = connectionSocket.recv(1024)
-               print("Download Completed")
-            break
+            with open('received_file', 'wb') as f:
+                print('file opened')
+                while True:
+                    print('receiving data...')
+                    data = conn.recv(1024)
+                    print(data)
+                    if not data:
+                        break
+                    # write data to a file
+                    f.write(data)
+            f.close()
+            print("successfully get the file")
         else:
             print('Client:' + client)
             sentence = input('Server: ')
-            connectionSocket.send(sentence.encode())
+            conn.send(sentence.encode())
         
 def sendFile():
     serverName = input("Enter the IP you're connecting to:")
-    clientSocket = socket(AF_INET, SOCK_STREAM)
+    clientSocket = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
     clientSocket.connect((serverName,serverPort))
     print ('connected to ' + serverName + ":" + str(serverPort))
+    bFileFound = 0
+    
     while True:
         sentence = input('Input: ')
         clientSocket.send(sentence.encode())
@@ -51,11 +60,11 @@ def sendFile():
                     break
         
             if bFileFound == 0:
-                print(sFileName + " Not Found On Server")
+                print(sFileName + " Not Found in Directory")
         
             else:
                 print(sFileName + " File Found")
-                fUploadFile = open("files/" + sFileName, "rb")
+                fUploadFile = open("/"+sFileName, "rb")
                 sRead = fUploadFile.read(1024)
                 while sRead:
                     clientSocket.send(sRead)
