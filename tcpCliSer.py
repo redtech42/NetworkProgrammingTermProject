@@ -7,7 +7,7 @@ def sListen():
     serverSocket.listen(1)
     print ('The server is ready to receive')
     connectionSocket, addr = serverSocket.accept()
-    print ('connected')
+    print ('connected ' + serverName + ":" + str(serverPort))
     while True:
         client = connectionSocket.recv(1024).decode()
         if client == "end":
@@ -19,7 +19,7 @@ def sListen():
 def sendFile():
     clientSocket = socket(AF_INET, SOCK_STREAM)
     clientSocket.connect((serverName,serverPort))
-    print ('connected')
+    print ('connected to ' + serverName + ":" + str(serverPort))
     while True:
         sentence = input('Input: ')
         clientSocket.send(sentence.encode())
