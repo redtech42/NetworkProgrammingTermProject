@@ -1,7 +1,12 @@
-from socket import *
-serverName = '127.0.0.1'
+import socket
+import os 
+
+myIP = socket.gethostbyname(socket.gethostname())
+print(myIP)
 serverPort = 12000
+
 def sListen():
+    serverName = myIP
     serverSocket = socket(AF_INET,SOCK_STREAM)
     serverSocket.bind((serverName,serverPort))
     serverSocket.listen(1)
@@ -11,12 +16,13 @@ def sListen():
     while True:
         client = connectionSocket.recv(1024).decode()
         if client == "end":
-            exit()
+            serverSocket.close()
         print('Client:' + client)
         sentence = input('Server: ')
         connectionSocket.send(sentence.encode())
         
 def sendFile():
+    serverName = input("Enter the IP you're connecting to:")
     clientSocket = socket(AF_INET, SOCK_STREAM)
     clientSocket.connect((serverName,serverPort))
     print ('connected to ' + serverName + ":" + str(serverPort))
@@ -24,7 +30,7 @@ def sendFile():
         sentence = input('Input: ')
         clientSocket.send(sentence.encode())
         if sentence == "end":
-            exit()
+            clientSocket.close()
         modifiedSentence = clientSocket.recv(1024).decode()
         print('From Server:' + modifiedSentence)
        
