@@ -95,22 +95,27 @@ class Application(tk.Frame):
         self.filePathBox = TextWithVar(self.sendingSide, textvariable=self.filePath, height=1, width=30)
         self.filePathBox.grid(row=5, column=0, columnspan=3, sticky=tk.W+tk.E, padx=3, pady=3)
         
+        self.sendFileName = tk.StringVar()
+        self.sendFileName.set("Enter the name of your file")
+        self.sendFileNameBox = TextWithVar(self.sendingSide, textvariable=self.sendFileName, height=1, width=30)
+        self.sendFileNameBox.grid(row=6, column=0, columnspan=3, sticky=tk.W+tk.E, padx=3, pady=3)
+        
         self.connectButton = tk.Button(self.sendingSide)
         self.connectButton["text"] = "Connect"
         #self.connectButton["command"] = self.connectToPeer
         self.connectButton["command"] = self.displayConnected
-        self.connectButton.grid(row=6, column=0, sticky=tk.W, padx=3, pady=3)
+        self.connectButton.grid(row=7, column=0, sticky=tk.W, padx=3, pady=3)
         
         self.readyButton = tk.Button(self.sendingSide)
         self.readyButton["text"] = "   "
         self.readyButton["bg"] = "red"
-        self.readyButton.grid(row=6, column=1, padx=3, pady=3)
+        self.readyButton.grid(row=7, column=1, padx=3, pady=3)
         
         self.sendButton = tk.Button(self.sendingSide)
         self.sendButton["text"] = "Send"
         #self.sendButton["command"] = self.sendFile
         self.sendButton["command"] = self.displayDisconnected
-        self.sendButton.grid(row=6, column=2, padx=3, pady=3)
+        self.sendButton.grid(row=7, column=2, padx=3, pady=3)
         
         
     def acceptFile(self, accepting):
