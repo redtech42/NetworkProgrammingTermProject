@@ -1,4 +1,5 @@
 import tkinter as tk
+from TextWithVar import *
 
 class Application(tk.Frame):
     def __init__(self, master=None):
@@ -39,19 +40,24 @@ class Application(tk.Frame):
         
         self.sourceIPString = tk.StringVar()
         self.sourceIPString.set("Source IP")
-        self.sourceIPBox = tk.Entry(self.receivingSide, textvariable=self.sourceIPString)
-        self.sourceIPBox.config(state='readonly')
+        self.sourceIPBox = TextWithVar(self.receivingSide, textvariable=self.sourceIPString, height=1, width=30)
+        #self.sourceIPBox.config(state='readonly')
         self.sourceIPBox.grid(row=1, column=1, columnspan=2, padx=3, pady=3)
         
-        self.fileNameText = tk.StringVar()
-        self.fileNameText.set("Incoming file name")
-        self.fileNameBox = tk.Entry(self.receivingSide, textvariable=self.fileNameText)
-        self.fileNameBox.config(state='readonly')
+        self.fileNameString = tk.StringVar()
+        self.fileNameString.set("Incoming file name")
+        self.fileNameBox = TextWithVar(self.receivingSide, textvariable=self.fileNameString, height=1, width=30)
+        #self.fileNameBox.config(state='readonly')
         self.fileNameBox.grid(row=2, column=1, columnspan=2, padx=3, pady=3)
+        
+        self.fileDenyButton = tk.Button(self.receivingSide)
+        self.fileDenyButton["text"] = "Deny file"
+        self.fileDenyButton["command"] = self.acceptFile(False)
+        self.fileDenyButton.grid(row=3, column=0,sticky=tk.W, padx=3, pady=3)
         
         self.fileAcceptButton = tk.Button(self.receivingSide)
         self.fileAcceptButton["text"] = "Accept file"
-        #self.fileAcceptButton["command"] = self.acceptFile
+        #self.fileAcceptButton["command"] = self.acceptFile(True)
         self.fileAcceptButton.grid(row=3, column=2,sticky=tk.E, padx=3, pady=3)
         
         #this is to pad some space between the sending and receiving side of the window
@@ -77,8 +83,8 @@ class Application(tk.Frame):
         
         self.destIPString = tk.StringVar()
         self.destIPString.set("Destination IP")
-        self.destIPEntry = tk.Entry(self.sendingSide, textvariable=self.destIPString)
-        self.destIPEntry.grid(row=3, column=1, columnspan=2, sticky=tk.E, padx=3, pady=3)
+        self.destIPBox = TextWithVar(self.sendingSide, textvariable=self.destIPString, height=1, width=30)
+        self.destIPBox.grid(row=3, column=1, columnspan=2, sticky=tk.E, padx=3, pady=3)
         
         self.filePathLabel = tk.Label(self.sendingSide)
         self.filePathLabel["text"] = "Sending file at:"
@@ -86,8 +92,8 @@ class Application(tk.Frame):
         
         self.filePath = tk.StringVar()
         self.filePath.set("Enter the path of your file")
-        self.filePathEntry = tk.Entry(self.sendingSide, textvariable=self.filePath)
-        self.filePathEntry.grid(row=5, column=0, columnspan=3, sticky=tk.W+tk.E, padx=3, pady=3)
+        self.filePathBox = TextWithVar(self.sendingSide, textvariable=self.filePath, height=1, width=30)
+        self.filePathBox.grid(row=5, column=0, columnspan=3, sticky=tk.W+tk.E, padx=3, pady=3)
         
         self.connectButton = tk.Button(self.sendingSide)
         self.connectButton["text"] = "Connect"
@@ -107,6 +113,9 @@ class Application(tk.Frame):
         self.sendButton.grid(row=6, column=2, padx=3, pady=3)
         
         
+    def acceptFile(self, accepting):
+        self.sourceIPString = ""
+        self.fileNameString = ""
         
     def displayConnected(self):
         self.readyButton.configure(bg="green")
