@@ -22,13 +22,14 @@ def sListen():
             sendFile.close()
         if client == "sendFile":
             with open('received_file', 'wb') as f:
+                print('file opened')
                 while True:
-                    data = conn.recv(1024)
-                    print('file opened')
-                    if not data:
-                        print("no data found")
-                        break
                     print('receiving data...')
+                    data = conn.recv(1024)
+                    if data.decode() != "done":
+                        print(data)
+                    else:
+                        break
                     # write data to a file
                     f.write(data)
             f.close()
@@ -66,10 +67,14 @@ def sendFile():
                 print(fileP + "/" + sFileName + " File Found")
                 fUploadFile = open(sFileName, "rb")
                 sRead = fUploadFile.read(1024)
+                count = 1
                 while sRead:
+                    print(count)
                     clientSocket.send(sRead)
                     sRead = fUploadFile.read(1024)
+                    count += 1
                 print("Sending Completed")
+                clientSocket.send("done".encode())
 
         modifiedSentence = clientSocket.recv(1024).decode()
         print('From Server:' + modifiedSentence)
