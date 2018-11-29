@@ -26,8 +26,7 @@ ProgressUpdates.md
 - Gui work
     - Gui works and is connected to program
     - Same Gui screen is viewed by both sender and reciever
-<<<<<<< HEAD
-    
-=======
-    
->>>>>>> 9f6a2c73556564881089fb90c00ed6557c2d0bb2
+
+### Final
+- The Gui was created but we were unable to link it to the backend
+- The program works as intended if running through console
