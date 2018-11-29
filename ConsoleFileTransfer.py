@@ -1,7 +1,7 @@
 import socket
 import os
 import sys
-
+#get host IP
 myIP = socket.gethostbyname(socket.gethostname())
 print(myIP)
 serverPort = 12000
@@ -52,6 +52,7 @@ def sendFile():
         clientSocket.send(sentence.encode())
         if sentence == "end":
             sendFile().close()
+        #Send file
         elif sentence == "sendFile":
             fileP = input("enter file path")
             sFileName = input("enter file name")
@@ -82,7 +83,7 @@ def sendFile():
         modifiedSentence = clientSocket.recv(1024).decode()
         print('From Server:' + modifiedSentence)
     
-
+#Main Body
 I = input("Send File or Receive File:")
 if (I.lower() == "send file"):
     sendFile()
