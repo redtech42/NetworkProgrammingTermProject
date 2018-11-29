@@ -50,6 +50,19 @@ File tranfer is very imprtant in this day and age. Gaining the knowleadge nesses
 - Flesh out the UI 
 -	Fix any problems and/or outlier bugs
 
+# Instructions
+
+### In order to run the program through the console, run the ConsoleFileTransfur.py file on both the sender and receiver
+- If you are sending a file type:
+  - Send file
+  - the receiver's IP
+  - sendFile
+  - file path
+  - file name followed by the extention
+- If you are the receiver type:
+  - receive file
+- When you get the file it will be saved as Received_file in the directory that this file is located
+  
 
 # Team Members
 * Dylan Knepper, developer
