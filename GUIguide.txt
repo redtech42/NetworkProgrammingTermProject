@@ -1,0 +1,23 @@
+					The Official Guide to the Buttons, Bells and Whistles!
+Source IP Textbox - Automatically populates with the IP address of the user sending you a file as soon as they connect
+
+Incoming File Name - Self explanatory, automatically populates with the name of the file being sent to you.
+
+Deny/Accept File Buttons - These let the user decide whether to receive the file. Denying will close the socket, accepting will save it to the
+			   working directory.
+
+Available Users List - This list would contain all the IP addresses with this program's socket open, meaning they are ready to receive files.
+		       It populates with the Scan button, which doesn't do much else.
+
+Scan Button - Look up about 2 lines.
+
+Destination IP Textbox - The user would manually enter the IP address from the list above that they would like to send the file to
+
+Path and Name of file - The user enters the filepath of their file, copied and pasted from a file explorer, which tells the program which
+  			file to send, as well as which file name to report to the other user in their Incoming File Name
+
+Connect Button - This button connects this user to the other user, giving them this user's IP address as well as the name of the file you 
+		 entered above. The red light also turns green when the other user accepts to show that the two users are connected.
+
+Send Button - This button sends the file to the other user, then closes the socket, reopening the listening channel to receive files.
+
