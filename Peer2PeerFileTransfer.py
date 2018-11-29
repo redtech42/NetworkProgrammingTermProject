@@ -1,8 +1,12 @@
 import socket
 import os
 import tkinter as tk
-from TextWithVar import *
+import TextWithVar
 
+myIP = socket.gethostbyname(socket.gethostname())
+print(myIP)
+serverPort = 12000
+    
 class Application(tk.Frame):
     def __init__(self, master=None):
         super().__init__(master)
@@ -10,7 +14,6 @@ class Application(tk.Frame):
         self.grid()
         self.create_widgets()
         
-        connectedSocket = self.sListen
 
     def create_widgets(self):
 
@@ -35,24 +38,24 @@ class Application(tk.Frame):
         
         self.sourceIPString = tk.StringVar()
         self.sourceIPString.set("Source IP")
-        self.sourceIPBox = TextWithVar(self.receivingSide, textvariable=self.sourceIPString, height=1, width=30)
+        self.sourceIPBox = TextWithVar.TextWithVar(self.receivingSide, textvariable=self.sourceIPString, height=1, width=30)
         #self.sourceIPBox.config(state='readonly')
         self.sourceIPBox.grid(row=1, column=1, columnspan=2, padx=3, pady=3)
         
         self.fileNameString = tk.StringVar()
         self.fileNameString.set("Incoming file name")
-        self.fileNameBox = TextWithVar(self.receivingSide, textvariable=self.fileNameString, height=1, width=30)
+        self.fileNameBox = TextWithVar.TextWithVar(self.receivingSide, textvariable=self.fileNameString, height=1, width=30)
         #self.fileNameBox.config(state='readonly')
         self.fileNameBox.grid(row=2, column=1, columnspan=2, padx=3, pady=3)
         
         self.fileDenyButton = tk.Button(self.receivingSide)
         self.fileDenyButton["text"] = "Deny file"
-        self.fileDenyButton["command"] = self.acceptFile(False)
+       # self.fileDenyButton["command"] = self.acceptFile(False)
         self.fileDenyButton.grid(row=3, column=0,sticky=tk.W, padx=3, pady=3)
         
         self.fileAcceptButton = tk.Button(self.receivingSide)
-        self.fileAcceptButton["text"] = "Accept file"
-        self.fileAcceptButton["command"] = self.acceptFile(True)
+        self.fileAcceptButton["text"] = "Listen"
+        self.fileAcceptButton["command"] = self.sListen()
         self.fileAcceptButton.grid(row=3, column=2,sticky=tk.E, padx=3, pady=3)
         
         #this is to pad some space between the sending and receiving side of the window
@@ -78,7 +81,7 @@ class Application(tk.Frame):
         
         self.destIPString = tk.StringVar()
         self.destIPString.set("Destination IP")
-        self.destIPBox = TextWithVar(self.sendingSide, textvariable=self.destIPString, height=1, width=30)
+        self.destIPBox = TextWithVar.TextWithVar(self.sendingSide, textvariable=self.destIPString, height=1, width=30)
         self.destIPBox.grid(row=3, column=1, columnspan=2, sticky=tk.E, padx=3, pady=3)
         
         self.filePathLabel = tk.Label(self.sendingSide)
@@ -87,17 +90,17 @@ class Application(tk.Frame):
         
         self.filePath = tk.StringVar()
         self.filePath.set("Enter the path of your file")
-        self.filePathBox = TextWithVar(self.sendingSide, textvariable=self.filePath, height=1, width=30)
+        self.filePathBox = TextWithVar.TextWithVar(self.sendingSide, textvariable=self.filePath, height=1, width=30)
         self.filePathBox.grid(row=5, column=0, columnspan=3, sticky=tk.W+tk.E, padx=3, pady=3)
         
         self.sendFileName = tk.StringVar()
         self.sendFileName.set("Enter the name of your file")
-        self.sendFileNameBox = TextWithVar(self.sendingSide, textvariable=self.filePath, height=1, width=30)
+        self.sendFileNameBox = TextWithVar.TextWithVar(self.sendingSide, textvariable=self.filePath, height=1, width=30)
         self.sendFileNameBox.grid(row=6, column=0, columnspan=3, sticky=tk.W+tk.E, padx=3, pady=3)
         
         self.connectButton = tk.Button(self.sendingSide)
         self.connectButton["text"] = "Connect"
-        self.connectButton["command"] = self.connectToPeer(destIPString)
+        self.connectButton["command"] = self.connectToPeer(self.destIPString)
         self.connectButton["command"] = self.displayConnected
         self.connectButton.grid(row=7, column=0, sticky=tk.W, padx=3, pady=3)
         
@@ -108,23 +111,26 @@ class Application(tk.Frame):
         
         self.sendButton = tk.Button(self.sendingSide)
         self.sendButton["text"] = "Send"
-        self.sendButton["command"] = self.sendFile(filePath, sendFileName, connectedSocket)
+        self.sendButton["command"] = self.sendFileB(self.filePath, self.sendFileName, self.destIPString)
         self.sendButton["command"] = self.displayDisconnected
         self.sendButton.grid(row=7, column=2, padx=3, pady=3)
         
-    def connectToPeer(IP):
-        connectedSocket = connect(IP)
-        
-        
-    def acceptFile(self, accepting):
-        self.sourceIPString = ""
-        self.fileNameString = ""
-        if accepting:
-            accept(connectedSocket)
-        else:
-            deny(connectedSocket)
-        
-        self.displayDisconnected
+    def connectToPeer(self, IP):
+        ip = str(IP)
+        if len(ip) > 10:
+            self.connectedSocket = self.connect(ip)
+    def sendFileB(self, filePath, sendFileName, IP):
+        if (len(str(filePath)) > 9 and len(str(sendFileName)) > 9 and len(str(IP)) > 9):
+            self.sendFile(str(self.filePath), str(self.sendFileName), str(self.IP))
+#    def acceptFile(self, accepting):
+#        self.sourceIPString = ""
+#        self.fileNameString = ""
+#        if accepting:
+#            self.accept(self.connectedSocket)
+#        else:
+#            self.deny(self.connectedSocket)
+#        
+#        self.displayDisconnected
         
     def displayConnected(self):
         self.readyButton.configure(bg="green")
@@ -132,15 +138,47 @@ class Application(tk.Frame):
     def displayDisconnected(self):
         self.readyButton.configure(bg="red")
     
-    
-    myIP = socket.gethostbyname(socket.gethostname())
-    print(myIP)
-    serverPort = 12000
 
-    def accept(conn):
-        conn.send("accepted".encode())
-        self.fileNameString = ""
-        self.sourceIPString = ""
+
+#    def accept(self, conn):
+#        conn.send("accepted".encode())
+#        self.fileNameString = ""
+#        self.sourceIPString = ""
+#        while True:
+#            with open('received_file', 'wb') as f:
+#                print('file opened')
+#                while True:
+#                    print('receiving data...')
+#                    data = conn.recv(1024)
+#                    if data.decode() != "done":
+#                        print(data)
+#                    else:
+#                        break
+#                    # write data to a file
+#                    f.write(data)
+#            f.close()
+#            print("successfully got the file")
+#
+#    def deny(self, conn):
+#        conn.send("denied".encode())
+#        conn.close()
+#        self.fileNameString = ""
+#        self.sourceIPString = ""
+
+    def sListen(self):
+        serverName = myIP
+        serverSocket = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+        serverSocket.bind((serverName,12000))
+        serverSocket.listen(5)
+        print("server is listening...")
+        print ('The server is ready to receive')
+        conn, addr = serverSocket.accept()
+        print ('connected ' + serverName + ":" + str(12000))
+        self.fileNameString = conn.recv(1024).decode()
+        self.sourceIPString = conn.getpeername()
+#        return conn
+#        self.fileNameString = ""
+#        self.sourceIPString = ""
         while True:
             with open('received_file', 'wb') as f:
                 print('file opened')
@@ -155,37 +193,26 @@ class Application(tk.Frame):
                     f.write(data)
             f.close()
             print("successfully got the file")
-
-    def deny(conn):
-        conn.send("denied".encode())
-        conn.close()
-        self.fileNameString = ""
-        self.sourceIPString = ""
-
-    def sListen():
-        serverName = myIP
-        serverSocket = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-        serverSocket.bind((serverName,12000))
-        serverSocket.listen(5)
-        print("server is listening...")
-        print ('The server is ready to receive')
-        conn, addr = serverSocket.accept()
-        print ('connected ' + serverName + ":" + str(12000))
-        self.fileNameString = conn.recv(1024).decode()
-        self.sourceIPString = conn.getpeername()
-        return conn
         
 
-    def connect(IP):
+#    def connect(self, IP):
+#        serverName = IP
+#        print(serverName)
+#        clientSocket = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+#        clientSocket.connect((serverName,12000))
+#        print ('connected to ' + serverName + ":" + str(12000))
+#        return clientSocket
+             
+    def sendFile(self, filePath,FileName, IP):
         serverName = IP
+        print(serverName)
         clientSocket = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
         clientSocket.connect((serverName,12000))
         print ('connected to ' + serverName + ":" + str(12000))
-        return clientSocket
-             
-    def sendFile(filePath,FileName,clientSocket):
         bFileFound = 0
-        
+        print(str (filePath))
+        print(str (FileName))
+        print(str (clientSocket))
         while True:
             fileP = filePath
             sFileName = FileName
@@ -199,23 +226,23 @@ class Application(tk.Frame):
                 print(sFileName + " Not Found in Directory")
             else:
                 clientSocket.send(FileName.encode())
-                modifiedSentence = clientSocket.recv(1024).decode()
-                if modifiedSentence == 'accept':
+ #               modifiedSentence = clientSocket.recv(1024).decode()
+ #               if modifiedSentence == 'accept':
                     
-                    print(fileP + "/" + sFileName + " File Found")
-                    fUploadFile = open(sFileName, "rb")
+                print(fileP + "/" + sFileName + " File Found")
+                fUploadFile = open(sFileName, "rb")
+                sRead = fUploadFile.read(1024)
+                count = 1
+                while sRead:
+                    print(count)
+                    clientSocket.send(sRead)
                     sRead = fUploadFile.read(1024)
-                    count = 1
-                    while sRead:
-                        print(count)
-                        clientSocket.send(sRead)
-                        sRead = fUploadFile.read(1024)
-                        count += 1
-                    print("Sending Completed")
-                    clientSocket.send("done".encode())
-                    clientSocket.close()
-                else:
-                    clientSocket.close()
+                    count += 1
+                print("Sending Completed")
+                clientSocket.send("done".encode())
+                clientSocket.close()
+ #               else:
+ #                   clientSocket.close()
         
 
 

@@ -7,7 +7,7 @@ serverPort = 12000
 
 def sListen():
     serverName = myIP
-    serverSocket = socket(AF_INET,SOCK_STREAM)
+    serverSocket = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
     serverSocket.bind((serverName,serverPort))
     serverSocket.listen(1)
     print ('The server is ready to receive')
@@ -23,7 +23,7 @@ def sListen():
         
 def sendFile():
     serverName = input("Enter the IP you're connecting to:")
-    clientSocket = socket(AF_INET, SOCK_STREAM)
+    clientSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     clientSocket.connect((serverName,serverPort))
     print ('connected to ' + serverName + ":" + str(serverPort))
     while True:
