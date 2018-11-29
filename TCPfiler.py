@@ -19,19 +19,20 @@ def sListen():
     while True:
         client = conn.recv(1024).decode()
         if client == "end":
-            exit()
+            sendFile.close()
         if client == "sendFile":
             with open('received_file', 'wb') as f:
-                print('file opened')
                 while True:
                     data = conn.recv(1024)
+                    print('file opened')
                     if not data:
+                        print("no data found")
                         break
                     print('receiving data...')
                     # write data to a file
                     f.write(data)
             f.close()
-            print("successfully get the file")
+            print("successfully got the file")
         else:
             print('Client:' + client)
             sentence = input('Server: ')
@@ -48,7 +49,7 @@ def sendFile():
         sentence = input('Input: ')
         clientSocket.send(sentence.encode())
         if sentence == "end":
-            sendFile().close
+            sendFile().close()
         elif sentence == "sendFile":
             fileP = input("enter file path")
             sFileName = input("enter file name")
@@ -62,8 +63,8 @@ def sendFile():
                 print(sFileName + " Not Found in Directory")
         
             else:
-                print(sFileName + " File Found")
-                fUploadFile = open("/"+sFileName, "rb")
+                print(fileP + "/" + sFileName + " File Found")
+                fUploadFile = open(sFileName, "rb")
                 sRead = fUploadFile.read(1024)
                 while sRead:
                     clientSocket.send(sRead)
@@ -74,10 +75,10 @@ def sendFile():
         print('From Server:' + modifiedSentence)
     
 
-I = input("Client or Server")
-if (I == "Client"):
+I = input("Send File or Receive File:")
+if (I.lower() == "send file"):
     sendFile()
     
-elif (I == "Server"):    
+elif (I.lower() == "receive file"):    
     sListen()
 
