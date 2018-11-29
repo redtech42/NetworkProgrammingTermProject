@@ -25,7 +25,7 @@ def accept(conn):
 
 def deny(conn):
     conn.send("deny".encode())
-    conn.close
+    conn.close()
 
 def sListen():
     serverName = myIP
@@ -77,9 +77,9 @@ def sendFile(filePath,FileName,clientSocket):
                     count += 1
                 print("Sending Completed")
                 clientSocket.send("done".encode())
-                clientSocket.close
+                clientSocket.close()
             else:
-                clientSocket.close
+                clientSocket.close()
     
 
 I = input("Send File or Receive File: ")
