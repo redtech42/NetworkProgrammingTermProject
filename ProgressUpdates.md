@@ -30,3 +30,4 @@ ProgressUpdates.md
 ### Final
 - The Gui was created but we were unable to link it to the backend
 - The program works as intended if running through console
+- File send and receive result is quick and simple as intended
