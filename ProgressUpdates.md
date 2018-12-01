@@ -13,12 +13,18 @@ ProgressUpdates.md
 - tkinter
 	- Got tkinter to work
 	- Looked at basic framework for making an interactive window
+### Week 3:
+- Testing out Basic framework
+	- Main loop does not switch from sending to receiving as simultaneously as we anticipated
+	- Unable to display list of peers, however, was able to display available ports
+- tkinter worked in Python 2 but not 3
+	- Rewriting tkinter code in Python 3 structure
 ### Week 4:
-- Esablish connection between two peers
+- Establish connection between two peers
     - Can chat between the two peers 
-    - Two peers are on seperate computers on the same network
+    - Two peers are on separate computers on the same network
 - Gui work
-    - using tkinter we are placing lables, text fields, and buttons
+    - using tkinter we are placing labels, text fields, and buttons
 ### Week 5
 - file sending
     - Can send files from one peer to another peer
@@ -30,4 +36,4 @@ ProgressUpdates.md
 ### Final
 - The Gui was created but we were unable to link it to the backend
 - The program works as intended if running through console
-- File send and receive result is quick and simple as intended
+- File send and receive result is quick and simple as intended 
