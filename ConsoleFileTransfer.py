@@ -1,7 +1,8 @@
 import socket
 import os
 import sys
-#get host IP
+
+#get IP for connecting
 myIP = socket.gethostbyname(socket.gethostname())
 print(myIP)
 serverPort = 12000
@@ -52,7 +53,7 @@ def sendFile():
         clientSocket.send(sentence.encode())
         if sentence == "end":
             sendFile().close()
-        #Send file
+        #Send file activation
         elif sentence == "sendFile":
             fileP = input("enter file path")
             sFileName = input("enter file name")
@@ -63,10 +64,10 @@ def sendFile():
                 if file == sFileName:
                     bFileFound = 1
                     break
-        
+            #if file not found
             if bFileFound == 0:
                 print(sFileName + " Not Found in Directory")
-        
+            #if file found
             else:
                 print(sFileName + " File Found")
                 fUploadFile = open(fileP + "/" +sFileName, "rb")
